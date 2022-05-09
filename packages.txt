@@ -1,7 +1,0 @@
-conda create --name daedalous python=3.8 pip
-conda activate daedalous
-python -m pip install --upgrade pip
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
-python -m pip pip install opencv-python
-python -m pip install --user numpy scipy matplotlib ipython jupyter pandas sympy nose
-python -m pip install gym
