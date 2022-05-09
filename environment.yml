@@ -28,6 +28,7 @@ dependencies:
   - numpy-base=1.21.5=py38hca35cd5_2
   - openssl=1.1.1n=h2bbff1b_0
   - pillow=9.0.1=py38hdc2b20a_0
+  - pip=22.0.4=pypi_0
   - pycparser=2.21=pyhd3eb1b0_0
   - pyopenssl=22.0.0=pyhd3eb1b0_0
   - pysocks=1.7.1=py38haa95532_0
