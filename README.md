@@ -6,4 +6,9 @@
 
 # Installation
 
-Execute instructions found in `packages.txt`
+Execute:
+
+```powershell
+conda env create --file environment.yml
+conda activate rainbow
+```
