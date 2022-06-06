@@ -4,7 +4,7 @@
 
 [//]: # (1. pip install msgpack-rpc-python 2. pip install airsim 3. pip install -e envs)
 
-# Installation
+### Installation
 
 Execute:
 
@@ -12,3 +12,10 @@ Execute:
 conda env create --file environment.yml
 conda activate rainbow
 ```
+
+### TODO
+
+- [ ] Add non-learning episodes in the beginning for warmup
+- [ ] Add `yaml` configuration file utilities as well as argument parser
+- [ ] Complete comments and docstrings
+- [ ] Add flexibility in environment for either 1D or 2D observations
