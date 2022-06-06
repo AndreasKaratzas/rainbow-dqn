@@ -19,3 +19,4 @@ conda activate rainbow
 - [ ] Add `yaml` configuration file utilities as well as argument parser
 - [ ] Complete comments and docstrings
 - [ ] Add flexibility in environment for either 1D or 2D observations
+- [ ] Remove memory checkpoints and adjust code to utilize the warmup episodes
