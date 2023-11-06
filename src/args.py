@@ -9,10 +9,7 @@ from common.terminal import colorstr
 def info():
     print(f"\n\n"
           f"\t\t      The {colorstr(['red', 'bold'], list(['Rainbow DQN']))} software operates as a RL framework \n"
-          f"\t\t for the FairBoost variant tuned around Multi-DNN scheduling \n"
-          f"\t\t     fairness. The purpose of this software is to optimize \n"
-          f"\t\t  the scheduling of a multi-DNN application on heterogeneous \n"
-          f"\t\t                    embedded platforms. \n"
+          f"\t\t for efficient discrete action space exploration. \n"
           f"\n")
           
 
