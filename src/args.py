@@ -16,7 +16,7 @@ def info():
 def get_options():
     """Example run:
     
-    >>> python main.py --device 'cuda:0' --mem-capacity 100000 --batch-size 128 --target-sync 1000 --learning-starts 100000 --num-of-steps-to-checkpoint-model 1000 --num-of-steps-to-checkpoint-memory 10000 --episodes 10000 --gamma 0.99 --alpha 0.4 --beta 0.6 --prior-eps 1e-6 --v-min -21.0 --v-max 20.0 --n-atoms 51 --n-step 3 --verbosity 10 --learning-rate 2.5e-4 --info --use-deterministic-algorithms --clip-grad-norm 40.0 --top-k 10 --num-hiddens 512 --wandb --tensorboard --name "FairBoost" --store "options" --verbose --activation 'gelu' --seed 33 --workload 0 12 10 1 --train
+    >>> python main.py --device 'cuda:0' --mem-capacity 100000 --batch-size 128 --target-sync 1000 --learning-starts 100000 --num-of-steps-to-checkpoint-model 1000 --num-of-steps-to-checkpoint-memory 10000 --episodes 10000 --gamma 0.99 --alpha 0.4 --beta 0.6 --prior-eps 1e-6 --v-min -21.0 --v-max 20.0 --n-atoms 51 --n-step 3 --verbosity 10 --learning-rate 2.5e-4 --info --use-deterministic-algorithms --clip-grad-norm 40.0 --top-k 10 --num-hiddens 512 --wandb --tensorboard --name "Rainbow" --store "options" --verbose --activation 'gelu' --seed 33 --workload 0 12 10 1 --train
     """
     parser = argparse.ArgumentParser(
         description=f'Parser for the Rainbow DQN.\n'
@@ -61,7 +61,7 @@ def get_options():
                         help="seed used to reproduce an experiment")
     parser.add_argument("--verbose", action="store_true",
                         help="print the model architecture and other information.")
-    parser.add_argument("--name", default="FairBoost", type=str,
+    parser.add_argument("--name", default="Rainbow", type=str,
                         help="alias for the running experiment")
     parser.add_argument("--use-deterministic-algorithms", action="store_true",
                         help="Forces the use of deterministic algorithms only.")
