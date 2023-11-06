@@ -1,5 +1,5 @@
 
-import numpy
+import numpy as np
 import pickle
 
 from collections import deque
@@ -25,16 +25,16 @@ class ReplayBuffer:
     """
 
     def __init__(self, obs_dim, size, save_dir, batch_size, n_step, gamma):
-        self.obs_buf = numpy.zeros([size, *obs_dim], dtype=numpy.float32)
-        self.next_obs_buf = numpy.zeros([size, *obs_dim], dtype=numpy.float32)
-        self.acts_buf = numpy.zeros([size], dtype=numpy.float32)
-        self.rews_buf = numpy.zeros([size], dtype=numpy.float32)
-        self.done_buf = numpy.zeros(size, dtype=numpy.float32)
+        self.obs_buf = np.zeros([size, *obs_dim], dtype=np.float32)
+        self.next_obs_buf = np.zeros([size, *obs_dim], dtype=np.float32)
+        self.acts_buf = np.zeros([size], dtype=np.float32)
+        self.rews_buf = np.zeros([size], dtype=np.float32)
+        self.done_buf = np.zeros(size, dtype=np.float32)
         self.max_size, self.batch_size = size, batch_size
         self.ptr, self.size, = 0, 0
 
         self.save_dir = save_dir
-        self.r_chkpt_cnt = 1
+        self.r_chkpt_cnt = 0
 
         # for N-step Learning
         self.n_step_buffer = deque(maxlen=n_step)
@@ -46,14 +46,14 @@ class ReplayBuffer:
         
         Attributes
         ----------
-        obs : numpy.ndarray
+        obs : np.ndarray
             State of agent at a time step `t`.
         act : int
             Selected action by the agent at a time step `t`.
         rew : float
             Accumulated reward by the agent after an action 
             given its state at a time step `t`.
-        next_obs : numpy.ndarray
+        next_obs : np.ndarray
             State of the agent at a time step `t + 1`.
         done : bool
             Terminal flag after the selected action at a time step `t`.
@@ -91,11 +91,12 @@ class ReplayBuffer:
             fetched by the random replay algorithm.
         """
 
-        idxs = numpy.random.choice(
+        idxs = np.random.choice(
             self.size, size=self.batch_size, replace=False)
 
         return dict(obs=self.obs_buf[idxs], next_obs=self.next_obs_buf[idxs],
-                    acts=self.acts_buf[idxs], rews=self.rews_buf[idxs], done=self.done_buf[idxs],
+                    acts=self.acts_buf[idxs], rews=self.rews_buf[idxs], 
+                    done=self.done_buf[idxs],
                     # for N-step Learning
                     indices=idxs,
                     )
@@ -158,9 +159,9 @@ class ReplayBuffer:
             checkpoint, by default "random"
         """
         save_path = self.save_dir / f"{attribute}-replay.npz"
-        numpy.savez_compressed(save_path, obs=self.obs_buf,
-                               next_obs=self.next_obs_buf, acts=self.acts_buf,
-                               rews=self.rews_buf, done=self.done_buf)
+        np.savez_compressed(save_path, obs=self.obs_buf,
+                            next_obs=self.next_obs_buf, acts=self.acts_buf,
+                            rews=self.rews_buf, done=self.done_buf)
 
         misc = dict(ptr=self.ptr, max_size=self.max_size)
         repl_misc_save_path = self.save_dir / f"{attribute}-replay-misc.pkl"
@@ -199,7 +200,7 @@ class ReplayBuffer:
         if not misc_repl_path.exists():
             raise ValueError(f"{misc_repl_path} does not exist")
 
-        chkpt = numpy.load(np_chkpt_path)
+        chkpt = np.load(np_chkpt_path)
 
         self.obs_buf = chkpt['obs']
         self.acts_buf = chkpt['acts']

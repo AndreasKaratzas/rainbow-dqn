@@ -1,10 +1,11 @@
 
-import numpy
+import numpy as np
 import random
 import pickle
+import sys
 
 from src.replay import ReplayBuffer
-from src.utils import SumSegmentTree, MinSegmentTree
+from src.structures import SumSegmentTree, MinSegmentTree
 
 
 class PrioritizedReplayBuffer(ReplayBuffer):
@@ -28,7 +29,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         Gamma parameter of multi-step learning algorithm.
     """
 
-    def __init__(self, obs_dim, size, save_dir, batch_size, alpha, n_step, gamma):
+    def __init__(self, obs_dim, size, save_dir, batch_size, alpha, n_step=1, gamma=0.99):
         assert alpha >= 0
 
         super(PrioritizedReplayBuffer, self).__init__(
@@ -37,7 +38,7 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         self.alpha = alpha
 
         self.save_dir = save_dir
-        self.p_chkpt_cnt = 1
+        self.p_chkpt_cnt = 0
 
         # capacity must be positive and a power of 2.
         tree_capacity = 1
@@ -52,14 +53,14 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         
         Attributes
         ----------
-        obs : numpy.ndarray
+        obs : np.ndarray
             State of agent at a time step `t`.
         act : int
             Selected action by the agent at a time step `t`.
         rew : float
             Accumulated reward by the agent after an
             action given its state at a time step `t`.
-        next_obs : numpy.ndarray
+        next_obs : np.ndarray
             State of the agent at a time step `t + 1`.
         done : bool
             Terminal flag after the selected
@@ -101,8 +102,8 @@ class PrioritizedReplayBuffer(ReplayBuffer):
         acts = self.acts_buf[indices]
         rews = self.rews_buf[indices]
         done = self.done_buf[indices]
-        weights = numpy.array([self._calculate_weight(i, beta)
-                               for i in indices])
+        weights = np.array([self._calculate_weight(i, beta)
+                            for i in indices])
 
         return dict(obs=obs, next_obs=next_obs, acts=acts, rews=rews,
                     done=done, weights=weights, indices=indices, )
@@ -244,5 +245,4 @@ class PrioritizedReplayBuffer(ReplayBuffer):
             self.alpha = miscellaneous["alpha"]
 
         print(f"Loaded miscellaneous data from {misc_chkpt_path}")
-
         print(f"Buffer checkpoint reloaded successfully")
