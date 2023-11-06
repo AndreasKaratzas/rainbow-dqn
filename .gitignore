@@ -4,9 +4,6 @@ __pycache__/
 # C extensions
 *.so
 
-# Custom Directories
-data/
-
 # Distribution / packaging
 .Python
 develop-eggs/
