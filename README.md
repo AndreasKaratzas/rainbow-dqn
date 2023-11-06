@@ -1,8 +1,6 @@
 # Rainbow DQN
 
-[//]: # (There is a bug related to PyLint. The `src` directory is not properly recognized and therefore PyLint cannot find the imported files throughout the project. To temporarily resolve this issue, set "python.analysis.autoSearchPaths": false .)
-
-[//]: # (1. pip install msgpack-rpc-python 2. pip install airsim 3. pip install -e envs)
+Implementation of [Rainbow-DQN](https://arxiv.org/abs/1710.02298) agent for state-of-the-art discrete action design space exploration.
 
 ### Installation
 
@@ -13,10 +11,19 @@ conda env create --file environment.yml
 conda activate rainbow
 ```
 
+Optional:
+
+Upgrade [PyTorch](https://pytorch.org/):
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+### NOTES
+
+Tested on [gym-super-mario-bros](https://github.com/Kautenja/gym-super-mario-bros) environment.
+
 ### TODO
 
-- [ ] Add non-learning episodes in the beginning for warmup
-- [ ] Add `yaml` configuration file utilities as well as argument parser
 - [ ] Complete comments and docstrings
 - [ ] Add flexibility in environment for either 1D or 2D observations
-- [ ] Remove memory checkpoints and adjust code to utilize the warmup episodes
+- [ ] Enrich this README (main page) with a description of the project, results, lab page, etc.
