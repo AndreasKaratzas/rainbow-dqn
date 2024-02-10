@@ -84,11 +84,11 @@ if __name__ == "__main__":
         render_mode = "rgb_array"
 
     # Build environment
-    env = gym_super_mario_bros.make('SuperMarioBros-1-1-v0', render_mode=render_mode)
+    env = gym_super_mario_bros.make('SuperMarioBros-1-1-v0')
     # Apply Wrappers to environment
     env = create_mario_env(env)
     # Reset environment
-    env.reset(seed=args.seed)
+    env.reset()
     # Create Rainbow agent
     agent = Agent(
         env=env, batch_size=args.batch_size, target_sync=args.target_sync, gamma=args.gamma,

@@ -36,7 +36,7 @@ class MaxAndSkipEnv(gym.Wrapper):
         self._obs_buffer.clear()
         obs = self.env.reset()
         self._obs_buffer.append(obs)
-        return obs
+        return obs 
 
 
 class MarioRescale84x84(gym.ObservationWrapper):
@@ -104,7 +104,6 @@ class BufferWrapper(gym.ObservationWrapper):
         self.buffer[:-1] = self.buffer[1:]
         self.buffer[-1] = observation
         return self.buffer
-
 
 class PixelNormalization(gym.ObservationWrapper):
     """

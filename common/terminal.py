@@ -60,8 +60,8 @@ def colorstr(options, string_args, formatter=None):
             elif alignment == '^':
                 substr = substr.center(width)
 
-        res.append(''.join(colors[x]
-                   for x in options) + substr + colors['end'])
+        #res.append(''.join(colors[x] for x in options) + substr + colors['end'])
+        res.append(''.join(colors[str(x)] for x in options) + str(substr) + colors['end'])
 
     space_char = ''.join(colors[x] for x in options) + ' ' + colors['end']
     return space_char.join(res)
